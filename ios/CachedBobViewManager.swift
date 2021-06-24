@@ -41,7 +41,14 @@ class CachedBobImageView: UIImageView {
         
         self.sd_imageIndicator = SDWebImageProgressIndicator.`default`
         let url = URL(string: uri)
-        self.sd_setImage(with: url)
+        
+        var option: SDWebImageOptions = .lowPriority
+        
+        if priority == "high" {
+            option = .highPriority
+        }
+        
+        self.sd_setImage(with: url, placeholderImage: nil, options: option)
         
         label.setText("4K")
     }
