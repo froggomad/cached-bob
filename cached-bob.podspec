@@ -2,7 +2,7 @@ require "json"
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
-Pod::Spec.new do |s|
+Pod::Spec.new do |s|  
   s.name         = "cached-bob"
   s.version      = package["version"]
   s.summary      = package["description"]
@@ -18,6 +18,4 @@ Pod::Spec.new do |s|
   s.dependency "React-Core"
   s.dependency "SDWebImage", "~> 5.8"
   s.dependency "SDWebImageWebPCoder", "~> 0.6.1"
-  
-  s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
 end
