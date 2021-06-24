@@ -6,7 +6,10 @@ import CachedBobViewManager from 'cached-bob';
 export default function App() {
   return (
     <View style={styles.container}>
-      <CachedBobViewManager color="#32a852" style={styles.box} />
+      <CachedBobViewManager
+        uri="https://i.imgur.com/6HsJHe9.jpeg"
+        style={styles.box}
+      />
     </View>
   );
 }

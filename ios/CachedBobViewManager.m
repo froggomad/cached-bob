@@ -2,6 +2,6 @@
 
 @interface RCT_EXTERN_MODULE(CachedBobViewManager, RCTViewManager)
 
-RCT_EXPORT_VIEW_PROPERTY(color, NSString)
+RCT_EXPORT_VIEW_PROPERTY(uri, NSString)
 
 @end
