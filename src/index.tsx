@@ -2,6 +2,7 @@ import { requireNativeComponent, ViewStyle } from 'react-native';
 
 type CachedBobProps = {
   uri: string;
+  priority: string;
   style: ViewStyle;
 };
 

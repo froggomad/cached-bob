@@ -7,6 +7,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <CachedBobViewManager
+        priority="low"
         uri="https://i.imgur.com/6HsJHe9.jpeg"
         style={styles.box}
       />
