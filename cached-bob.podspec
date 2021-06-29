@@ -18,4 +18,5 @@ Pod::Spec.new do |s|
   s.dependency "React-Core"
   s.dependency "SDWebImage", "~> 5.8"
   s.dependency "SDWebImageWebPCoder", "~> 0.6.1"
+  s.dependency "KDCircularProgress"
 end

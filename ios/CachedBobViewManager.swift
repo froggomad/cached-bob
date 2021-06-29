@@ -1,5 +1,6 @@
 import SDWebImage
 import UIKit
+import KDCircularProgress
 
 @objc(CachedBobViewManager)
 class CachedBobViewManager: RCTViewManager {
@@ -11,6 +12,7 @@ class CachedBobViewManager: RCTViewManager {
 class CachedBobImageView: UIImageView {
     
     var label = CachedBobLabel()
+    let progress = KDCircularProgress()
     
     @objc var uri: String = "" {
         didSet {
@@ -39,18 +41,52 @@ class CachedBobImageView: UIImageView {
             return
         }
         
-        self.sd_imageIndicator = SDWebImageProgressIndicator.`default`
+        /**
+         * Image priority
+         */
         let url = URL(string: uri)
-        
         var option: SDWebImageOptions = .lowPriority
-        
         if priority == "high" {
             option = .highPriority
         }
         
-        self.sd_setImage(with: url, placeholderImage: nil, options: option)
+        /**
+         * Progress
+         */
+        self.addSubview(progress)
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        progress.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        progress.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        progress.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        progress.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
-        label.setText("4K")
+        progress.trackThickness = 0.1
+        progress.progressThickness = 0.1
+        progress.glowAmount = 0.0
+        progress.startAngle = -90
+        progress.angle = 0
+        progress.glowAmount = 0
+        progress.trackColor = UIColor.black
+        progress.set(colors: UIColor.red)
+        
+    
+        self.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        
+        /**
+         * Set image
+         */
+        self.sd_setImage(with: url, placeholderImage: nil, options: option) { pr, size, url in
+            
+            let percent: Double = Double(pr) * 100 / Double(size)
+            let a: Double = 360 / 100 * percent
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.progress.animate(toAngle: a, duration: 0.2, completion: nil)
+            }
+            
+        } completed: { [weak self] img, err, cacheType, url in
+            self?.progress.isHidden = true
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
