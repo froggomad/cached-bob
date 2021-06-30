@@ -8,7 +8,12 @@ export default function App() {
     <View style={styles.container}>
       <CachedBobViewManager
         priority="low"
-        uri="https://i.imgur.com/6HsJHe9.jpeg"
+        sources={[
+          ['https://i.imgur.com/uxcy7TS.png', 'uxcy7TS'],
+          ['https://i.imgur.com/gXdy1Vn.jpeg', 'gXdy1Vn'],
+          ['https://i.imgur.com/3rrydD4.png', '3rrydD4'],
+          ['https://i.imgur.com/j8HdmNz.png', 'j8HdmNz']
+        ]}
         style={styles.box}
       />
     </View>

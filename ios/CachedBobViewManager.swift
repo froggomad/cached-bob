@@ -13,31 +13,26 @@ class CachedBobImageView: UIImageView {
     
     var label = CachedBobLabel()
     let progress = KDCircularProgress()
-    var sources = [
-        ["https://i.imgur.com/uxcy7TS.png"],
-        ["https://i.imgur.com/gXdy1Vn.jpeg"],
-        ["https://i.imgur.com/3rrydD4.png"],
-        ["https://i.imgur.com/j8HdmNz.png"],
-        ["https://upload.wikimedia.org/wikipedia/commons/e/e0/Large_Scaled_Forest_Lizard.jpg"]
-    ]
-    var current: Int = 0
-    var color: UIColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
     
-    var progressCallback: SDImageLoaderProgressBlock?
-    var completeCallback: SDExternalCompletionBlock?
-    
-    @objc var uri: String = "" {
+    @objc var sources: [[String]] = [] {
         didSet {
             didSetProps()
         }
-      }
-    
+    }
     
     @objc var priority: String = "" {
         didSet {
             didSetProps()
         }
     }
+    
+    var current: Int = 0
+    var color: UIColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
+    
+    var progressCallback: SDImageLoaderProgressBlock?
+    var completeCallback: SDExternalCompletionBlock?
+    
+    
     
     init() {
         super.init(frame: .zero)
@@ -48,7 +43,6 @@ class CachedBobImageView: UIImageView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
         label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
-        
         
         /**
          * Progress
@@ -83,15 +77,20 @@ class CachedBobImageView: UIImageView {
         }
         
         completeCallback = { [weak self] img, err, cacheType, url in
-            self?.progress.isHidden = true
-            self?.current += 1
-            self?.loadNext()
+            guard let self = self else { return }
+            
+            self.progress.isHidden = true
+            
+            self.label.setText(self.sources[self.current][1])
+            
+            self.current += 1
+            self.loadNext()
         }
     }
     
     func next() {
         
-        guard current < sources.count && sources[current].count > 0 else { return }
+        guard current < sources.count && sources[current].count > 1 else { return }
         
         /**
          * Image priority
@@ -106,25 +105,28 @@ class CachedBobImageView: UIImageView {
     }
     
     func loadNext() {
-        guard current < sources.count && sources[current].count > 0 else { return }
+        guard current < sources.count && sources[current].count > 1 else { return }
         
         let url = URL(string: sources[current][0])
         
         let option: SDWebImageOptions = .lowPriority
         SDWebImageManager.shared.loadImage(with: url, options: option, progress: nil) {
             [weak self] image, data, error, cacheType, bool, url in
+            guard let self = self else { return }
             
-            self?.image = image
-            self?.current += 1
-            self?.loadNext()
+            
+            self.label.setText(self.sources[self.current][1])
+            self.image = image
+            self.current += 1
+            self.loadNext()
         }
     }
     
     func didSetProps() {
-        if (uri == "" || priority == "") {
+        if (sources.count == 0 || priority == "") {
             return
         }
-
+        
         self.next()
     }
     
