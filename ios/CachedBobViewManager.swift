@@ -13,6 +13,14 @@ class CachedBobImageView: UIImageView {
     
     var label = CachedBobLabel()
     let progress = KDCircularProgress()
+    var sources = [
+        ["https://i.imgur.com/uxcy7TS.png"],
+        ["https://i.imgur.com/gXdy1Vn.jpeg"],
+        ["https://i.imgur.com/3rrydD4.png"],
+        ["https://i.imgur.com/j8HdmNz.png"],
+        ["https://upload.wikimedia.org/wikipedia/commons/e/e0/Large_Scaled_Forest_Lizard.jpg"]
+    ]
+    var current: Int = 0
     
     @objc var uri: String = "" {
         didSet {
@@ -34,25 +42,12 @@ class CachedBobImageView: UIImageView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
         label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
-    }
-    
-    func didSetProps() {
-        if (uri == "" || priority == "") {
-            return
-        }
         
-        /**
-         * Image priority
-         */
-        let url = URL(string: uri)
-        var option: SDWebImageOptions = .lowPriority
-        if priority == "high" {
-            option = .highPriority
-        }
         
         /**
          * Progress
          */
+        
         self.addSubview(progress)
         progress.translatesAutoresizingMaskIntoConstraints = false
         progress.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -69,8 +64,20 @@ class CachedBobImageView: UIImageView {
         progress.trackColor = UIColor.black
         progress.set(colors: UIColor.red)
         
+        // self.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+
+    }
     
-        self.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+    func next() {
+        
+        /**
+         * Image priority
+         */
+        let url = URL(string: sources[current][0])
+        var option: SDWebImageOptions = .lowPriority
+        if priority == "high" {
+            option = .highPriority
+        }
         
         /**
          * Set image
@@ -81,12 +88,39 @@ class CachedBobImageView: UIImageView {
             let a: Double = 360 / 100 * percent
             
             DispatchQueue.main.async { [weak self] in
-                self?.progress.animate(toAngle: a, duration: 0.2, completion: nil)
+                self?.progress.animate(toAngle: a, duration: 0.1, completion: nil)
             }
-            
         } completed: { [weak self] img, err, cacheType, url in
             self?.progress.isHidden = true
+            self?.current += 1
+            
+//            if (self!.current < self?.sources.count ?? 0) {
+//                self?.next()
+//             }
+            self?.loadNext()
         }
+    }
+    
+    func loadNext() {
+        if current >= sources.count { return }
+        
+        let url = URL(string: sources[current][0])
+        
+        SDWebImageManager.shared.loadImage(with: url, progress: nil) {
+            [weak self] image, data, error, cacheType, bool, url in
+            
+            self?.image = image
+            self?.current += 1
+            self?.loadNext()
+        }
+    }
+    
+    func didSetProps() {
+        if (uri == "" || priority == "") {
+            return
+        }
+
+        self.next()
     }
     
     required init?(coder aDecoder: NSCoder) {
