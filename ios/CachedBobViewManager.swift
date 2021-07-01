@@ -11,6 +11,11 @@ class CachedBobViewManager: RCTViewManager {
 
 class CachedBobImageView: UIImageView {
     
+    enum Priority: String {
+        case low
+        case high
+    }
+    
     var label = CachedBobLabel()
     let progress = KDCircularProgress()
     
@@ -26,7 +31,7 @@ class CachedBobImageView: UIImageView {
         }
     }
     
-    @objc var priority: String = "" {
+    @objc var priority: Priority = .low {
         didSet {
             didSetProps()
         }
@@ -91,7 +96,7 @@ class CachedBobImageView: UIImageView {
          */
         let url = URL(string: sources[current][0])
 
-        if priority == "high" {
+        if priority == .high {
             self.sd_setImage(with: url, placeholderImage: nil, options: .highPriority, progress: progressCallback, completed: completeCallback)
         } else {
             self.sd_setImage(with: url, placeholderImage: nil, progress: progressCallback, completed: completeCallback)
