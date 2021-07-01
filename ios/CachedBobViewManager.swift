@@ -41,47 +41,10 @@ class CachedBobImageView: UIImageView {
         super.init(frame: .zero)
         
         self.backgroundColor = self.color
-        self.addSubview(label)
-
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
-        ])
-        
-        /**
-         * Progress
-         */
-        
-        self.addSubview(progress)
-        progress.setupProgramatically()
-        NSLayoutConstraint.activate([
-            progress.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            progress.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        
+        addLabel()
+        addProgress()
         // self.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        
-        progressCallback = { pr, size, url in
-            
-            let percent: Double = Double(pr) * 100 / Double(size)
-            let a: Double = 360 / 100 * percent
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.progress.animate(toAngle: a, duration: 0.1, completion: nil)
-            }
-        }
-        
-        completeCallback = { [weak self] img, err, cacheType, url in
-            guard let self = self else { return }
-            
-            self.progress.isHidden = true
-            
-            self.label.setText(self.sources[self.current][1])
-            
-            self.current += 1
-            self.loadNext()
-        }
+        setCallbacks()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -127,6 +90,50 @@ class CachedBobImageView: UIImageView {
         }
         
         self.next()
+    }
+    
+    // MARK: - Init Helpers -
+    private func addLabel() {
+        self.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        ])
+    }
+    
+    private func addProgress() {
+        self.addSubview(progress)
+        progress.setupProgramatically()
+        
+        NSLayoutConstraint.activate([
+            progress.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            progress.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    private func setCallbacks() {
+        progressCallback = { pr, size, url in
+            
+            let percent: Double = Double(pr) * 100 / Double(size)
+            let a: Double = 360 / 100 * percent
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.progress.animate(toAngle: a, duration: 0.1, completion: nil)
+            }
+        }
+        
+        completeCallback = { [weak self] img, err, cacheType, url in
+            guard let self = self else { return }
+            
+            self.progress.isHidden = true
+            
+            self.label.setText(self.sources[self.current][1])
+            
+            self.current += 1
+            self.loadNext()
+        }
     }
     
 }
