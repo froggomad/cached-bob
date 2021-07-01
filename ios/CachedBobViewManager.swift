@@ -84,7 +84,6 @@ class CachedBobImageView: UIImageView {
     }
     
     func next() {
-        
         guard current < sources.count && sources[current].count > 1 else { return }
         
         /**
@@ -154,6 +153,10 @@ class CachedBobLabel: UIView {
         ])
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setText(_ text: String) {
         lb.text = text
         lb.sizeToFit()
@@ -162,9 +165,6 @@ class CachedBobLabel: UIView {
         frame.size = CGSize(width: lb.frame.width + 8, height: lb.frame.height + 8 )
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 extension KDCircularProgress {
