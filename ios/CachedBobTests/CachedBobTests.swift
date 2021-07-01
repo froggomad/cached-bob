@@ -20,8 +20,14 @@ class CachedBobTests: XCTestCase {
 
 class BobSpy: CachedBobImageView {
     func mockRetain() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            self?.lb.text = "Done"
+        progressCallback = { pr, size, url in
+            
+            let percent: Double = Double(pr) * 100 / Double(size)
+            let a: Double = 360 / 100 * percent
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 { [weak self] in
+                self?.progress.animate(toAngle: a, duration: 0.1, completion: nil)
+            }
         }
     }
 }
