@@ -154,15 +154,7 @@ class CachedBobLabel: UIView {
         
         backgroundColor = UIColor.gray.withAlphaComponent(0.4)
         layer.cornerRadius = 4
-        
-        addSubview(lb)
-        NSLayoutConstraint.activate([
-            lb.centerXAnchor.constraint(equalTo: centerXAnchor),
-            lb.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
-            widthAnchor.constraint(equalTo: lb.widthAnchor, constant: 8),
-            heightAnchor.constraint(equalTo: lb.heightAnchor, constant: 8)
-        ])
+        addLb()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -175,6 +167,17 @@ class CachedBobLabel: UIView {
         
         lb.frame.origin = CGPoint(x: 4, y: 4)
         frame.size = CGSize(width: lb.frame.width + 8, height: lb.frame.height + 8 )
+    }
+    
+    private func addLb() {
+        addSubview(lb)
+        NSLayoutConstraint.activate([
+            lb.centerXAnchor.constraint(equalTo: centerXAnchor),
+            lb.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            widthAnchor.constraint(equalTo: lb.widthAnchor, constant: 8),
+            heightAnchor.constraint(equalTo: lb.heightAnchor, constant: 8)
+        ])
     }
     
 }
