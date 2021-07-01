@@ -39,8 +39,10 @@ class CachedBobImageView: UIImageView {
         self.addSubview(label)
 
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
-        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        NSLayoutConstraint.activate([
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        ])
         
         /**
          * Progress
@@ -48,8 +50,10 @@ class CachedBobImageView: UIImageView {
         
         self.addSubview(progress)
         progress.setupProgramatically()
-        progress.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        progress.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            progress.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            progress.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
         
         // self.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         
@@ -141,11 +145,13 @@ class CachedBobLabel: UIView {
         layer.cornerRadius = 4
         
         addSubview(lb)
-        lb.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        lb.centerYAnchor.constraint(equalTo: centerYAnchor).isActive  = true
-        
-        widthAnchor.constraint(equalTo: lb.widthAnchor, constant: 8).isActive = true
-        heightAnchor.constraint(equalTo: lb.heightAnchor, constant: 8).isActive = true
+        NSLayoutConstraint.activate([
+            lb.centerXAnchor.constraint(equalTo: centerXAnchor),
+            lb.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            widthAnchor.constraint(equalTo: lb.widthAnchor, constant: 8),
+            heightAnchor.constraint(equalTo: lb.heightAnchor, constant: 8)
+        ])
     }
     
     func setText(_ text: String) {
@@ -172,9 +178,10 @@ extension KDCircularProgress {
                               trackColor: UIColor = .black,
                               setColor: UIColor = .red) {
         translatesAutoresizingMaskIntoConstraints = false
-
-        heightAnchor.constraint(equalToConstant: height).isActive = true
-        widthAnchor.constraint(equalToConstant: width).isActive = true
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: height),
+            widthAnchor.constraint(equalToConstant: width)
+        ])
         
         trackThickness = trackThickness
         progressThickness = progressThickness
