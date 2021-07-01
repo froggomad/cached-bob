@@ -7,8 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AAE9184D268E703B003A8278 /* CachedBobTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE9184C268E703B003A8278 /* CachedBobTests.swift */; };
+		AAE9184F268E703B003A8278 /* libCachedBob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 134814201AA4EA6300B7C361 /* libCachedBob.a */; };
 		F4FF95D7245B92E800C19C63 /* CachedBobViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* CachedBobViewManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AAE91850268E703B003A8278 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58B511D31A9E6C8500147676 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58B511DA1A9E6C8500147676;
+			remoteInfo = CachedBob;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
@@ -24,6 +36,9 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libCachedBob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCachedBob.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAE9184A268E703B003A8278 /* CachedBobTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CachedBobTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAE9184C268E703B003A8278 /* CachedBobTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedBobTests.swift; sourceTree = "<group>"; };
+		AAE9184E268E703B003A8278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* CachedBobViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachedBobViewManager.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* CachedBob-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CachedBob-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* CachedBobViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedBobViewManager.swift; sourceTree = "<group>"; };
@@ -34,6 +49,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAE91847268E703B003A8278 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAE9184F268E703B003A8278 /* libCachedBob.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,8 +77,19 @@
 				F4FF95D6245B92E800C19C63 /* CachedBobViewManager.swift */,
 				B3E7B5891CC2AC0600A0062D /* CachedBobViewManager.m */,
 				F4FF95D5245B92E700C19C63 /* CachedBob-Bridging-Header.h */,
+				AAE9184B268E703B003A8278 /* CachedBobTests */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				AAE9184A268E703B003A8278 /* CachedBobTests.xctest */,
 			);
+			sourceTree = "<group>";
+		};
+		AAE9184B268E703B003A8278 /* CachedBobTests */ = {
+			isa = PBXGroup;
+			children = (
+				AAE9184C268E703B003A8278 /* CachedBobTests.swift */,
+				AAE9184E268E703B003A8278 /* Info.plist */,
+			);
+			path = CachedBobTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,17 +112,41 @@
 			productReference = 134814201AA4EA6300B7C361 /* libCachedBob.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		AAE91849268E703B003A8278 /* CachedBobTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAE91854268E703B003A8278 /* Build configuration list for PBXNativeTarget "CachedBobTests" */;
+			buildPhases = (
+				AAE91846268E703B003A8278 /* Sources */,
+				AAE91847268E703B003A8278 /* Frameworks */,
+				AAE91848268E703B003A8278 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AAE91851268E703B003A8278 /* PBXTargetDependency */,
+			);
+			name = CachedBobTests;
+			productName = CachedBobTests;
+			productReference = AAE9184A268E703B003A8278 /* CachedBobTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		58B511D31A9E6C8500147676 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					58B511DA1A9E6C8500147676 = {
 						CreatedOnToolsVersion = 6.1.1;
+					};
+					AAE91849268E703B003A8278 = {
+						CreatedOnToolsVersion = 12.5.1;
+						DevelopmentTeam = 34P4RF23ET;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -106,9 +164,20 @@
 			projectRoot = "";
 			targets = (
 				58B511DA1A9E6C8500147676 /* CachedBob */,
+				AAE91849268E703B003A8278 /* CachedBobTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AAE91848268E703B003A8278 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
@@ -119,7 +188,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AAE91846268E703B003A8278 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAE9184D268E703B003A8278 /* CachedBobTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AAE91851268E703B003A8278 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 58B511DA1A9E6C8500147676 /* CachedBob */;
+			targetProxy = AAE91850268E703B003A8278 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		58B511ED1A9E6C8500147676 /* Debug */ = {
@@ -252,6 +337,65 @@
 			};
 			name = Release;
 		};
+		AAE91852268E703B003A8278 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 34P4RF23ET;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CachedBobTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kennydubroff.CachedBobTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AAE91853268E703B003A8278 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 34P4RF23ET;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CachedBobTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kennydubroff.CachedBobTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -269,6 +413,15 @@
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,
 				58B511F11A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAE91854268E703B003A8278 /* Build configuration list for PBXNativeTarget "CachedBobTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAE91852268E703B003A8278 /* Debug */,
+				AAE91853268E703B003A8278 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
