@@ -47,20 +47,9 @@ class CachedBobImageView: UIImageView {
          */
         
         self.addSubview(progress)
-        progress.translatesAutoresizingMaskIntoConstraints = false
-        progress.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        progress.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        progress.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        progress.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        progress.trackThickness = 0.1
-        progress.progressThickness = 0.1
-        progress.glowAmount = 0.0
-        progress.startAngle = -90
-        progress.angle = 0
-        progress.glowAmount = 0
-        progress.trackColor = UIColor.black
-        progress.set(colors: UIColor.red)
+        progress.setupProgramatically()
+        progress.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        progress.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         // self.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         
@@ -170,4 +159,30 @@ class CachedBobLabel: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension KDCircularProgress {
+    
+    func setupProgramatically(height: CGFloat = 100,
+                              trackThickness: CGFloat = 0.1,
+                              progressThickness: CGFloat = 0.1,
+                              glowAmount: CGFloat = 0.0,
+                              startAngle: CGFloat = -90,
+                              angle: CGFloat = 0,
+                              trackColor: UIColor = .black,
+                              setColor: UIColor = .red) {
+        translatesAutoresizingMaskIntoConstraints = false
+
+        heightAnchor.constraint(equalToConstant: height).isActive = true
+        widthAnchor.constraint(equalToConstant: width).isActive = true
+        
+        trackThickness = trackThickness
+        progressThickness = progressThickness
+        glowAmount = glowAmount
+        startAngle = startAngle
+        angle = angle
+        trackColor = trackColor
+        set(colors: setColor)
+    }
+    
 }
