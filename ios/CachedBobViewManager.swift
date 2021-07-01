@@ -14,6 +14,12 @@ class CachedBobImageView: UIImageView {
     var label = CachedBobLabel()
     let progress = KDCircularProgress()
     
+    var current: Int = 0
+    var color: UIColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
+    
+    var progressCallback: SDImageLoaderProgressBlock?
+    var completeCallback: SDExternalCompletionBlock?
+    
     @objc var sources: [[String]] = [] {
         didSet {
             didSetProps()
@@ -25,14 +31,6 @@ class CachedBobImageView: UIImageView {
             didSetProps()
         }
     }
-    
-    var current: Int = 0
-    var color: UIColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
-    
-    var progressCallback: SDImageLoaderProgressBlock?
-    var completeCallback: SDExternalCompletionBlock?
-    
-    
     
     init() {
         super.init(frame: .zero)
@@ -88,6 +86,10 @@ class CachedBobImageView: UIImageView {
         }
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func next() {
         
         guard current < sources.count && sources[current].count > 1 else { return }
@@ -130,9 +132,6 @@ class CachedBobImageView: UIImageView {
         self.next()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 class CachedBobLabel: UIView {
