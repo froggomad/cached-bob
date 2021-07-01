@@ -20,7 +20,7 @@ class CachedBobTests: XCTestCase {
 
 class BobSpy: CachedBobImageView {
     func mockRetain() {
-        DispatchQueue.main.asyncAfter(deadline: 0.5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             self?.lb.text = "Done"
         }
     }
