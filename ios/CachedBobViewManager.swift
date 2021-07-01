@@ -195,7 +195,7 @@ extension KDCircularProgress {
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: height),
-            widthAnchor.constraint(equalToConstant: width)
+            widthAnchor.constraint(equalToConstant: height)
         ])
         
         trackThickness = trackThickness
