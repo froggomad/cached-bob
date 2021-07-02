@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import CachedBob
 
 class CachedBobTests: XCTestCase {
     func testCachedBob_doesNot_leak() {
@@ -25,7 +26,7 @@ class BobSpy: CachedBobImageView {
             let percent: Double = Double(pr) * 100 / Double(size)
             let a: Double = 360 / 100 * percent
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 self?.progress.animate(toAngle: a, duration: 0.1, completion: nil)
             }
         }
